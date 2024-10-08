@@ -211,7 +211,8 @@ const creatememes = ({
           style={{
             width: "100%",
             padding: "14px",
-            backgroundColor: "#4CAF50",
+            backgroundImage:
+              "linear-gradient(135deg, #6b73ff 0%, #000dff 100%)",
             color: "white",
             fontSize: "18px",
             borderRadius: "12px",
@@ -219,13 +220,22 @@ const creatememes = ({
             cursor: "pointer",
             fontFamily: "Arial, sans-serif",
             transition: "all 0.3s ease",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            fontWeight: "bold",
+            letterSpacing: "1px",
+            textTransform: "uppercase",
           }}
           onMouseOver={(e) => {
-            (e.target as HTMLButtonElement).style.backgroundColor = "#45a049";
+            (e.target as HTMLButtonElement).style.backgroundImage =
+              "linear-gradient(135deg, #4a60e6 0%, #0009cc 100%)";
+            (e.target as HTMLButtonElement).style.boxShadow =
+              "0 6px 12px rgba(0, 0, 0, 0.2)";
           }}
           onMouseOut={(e) => {
-            (e.target as HTMLButtonElement).style.backgroundColor = "#4CAF50";
+            (e.target as HTMLButtonElement).style.backgroundImage =
+              "linear-gradient(135deg, #6b73ff 0%, #000dff 100%)";
+            (e.target as HTMLButtonElement).style.boxShadow =
+              "0 4px 10px rgba(0, 0, 0, 0.1)";
           }}
         >
           Create Meme
