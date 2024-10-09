@@ -101,28 +101,38 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 
-const creatememes = ({
-  searchParams,
-}: {
-  searchParams: { id: string; url: string };
-}) => {
-  const [meme, setMemes] = useState<string | null>(null);
+interface MemeProps {
+  searchParams: {
+    id: string;
+    url: string;
+  };
+}
+
+const creatememes: React.FC<MemeProps> = ({ searchParams }) => {
+  // const [memeUrl, setMemeUrl] = useState<string | null>(null);
+  const [meme, setMemes] = useState<string | null>(null); // * This const is used for image url *//
+  const [loading, setLoading] = useState<boolean>(false);
   const text1 = useRef<HTMLInputElement>(null);
   const text2 = useRef<HTMLInputElement>(null);
-  const [loading, setLoading] = useState<boolean>(false); // State to track loading
+
   const memes = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(text1.current?.value);
-    console.log(text2.current?.value);
-    const data = await fetch(
-      `https://api.imgflip.com/caption_image?template_id=${searchParams.id}&username=mabdullah6600&password=asdfgfdsa123&text0=${text1.current?.value}&text1=${text2.current?.value}`,
-      {
-        method: "POST",
-      }
-    );
-    const response = await data.json();
-    console.log(response);
-    setMemes(response.data.url);
+    setLoading(true);
+
+    const topText = text1.current?.value;
+    const bottomText = text2.current?.value;
+
+    if (topText && bottomText) {
+      const data = await fetch(
+        `https://api.imgflip.com/caption_image?template_id=${searchParams.id}&username=mabdullah6600&password=asdfgfdsa123&text0=${text1.current?.value}&text1=${text2.current?.value}`,
+        { method: "POST" }
+      );
+      const response = await data.json();
+      console.log(response);
+      setMemes(response.data.url);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -279,6 +289,34 @@ const creatememes = ({
               }}
             />
           </div>
+        )}
+        {/* Download button */}
+        {meme && (
+          <a
+            href={meme}
+            download="meme.jpg"
+            style={{
+              display: "inline-block",
+              marginTop: "16px",
+              padding: "10px 20px",
+              backgroundColor: "#4CAF50",
+              color: "#fff",
+              borderRadius: "8px",
+              textDecoration: "none",
+              fontSize: "16px",
+              fontWeight: "bold",
+              letterSpacing: "0.5px",
+              transition: "background-color 0.3s ease",
+            }}
+            onMouseOver={(e) =>
+              (e.currentTarget.style.backgroundColor = "#45a049")
+            }
+            onMouseOut={(e) =>
+              (e.currentTarget.style.backgroundColor = "#4CAF50")
+            }
+          >
+            Download Meme
+          </a>
         )}
       </form>
     </>

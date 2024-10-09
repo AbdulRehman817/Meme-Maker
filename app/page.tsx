@@ -31,7 +31,29 @@ const Page = async () => {
                 width={200}
                 height={200}
               />
-              <button className="btn btn-outline">
+              <button
+                type="submit"
+                className="
+    w-full 
+    py-3 
+    bg-gradient-to-r 
+    from-indigo-500 
+    to-blue-700 
+    text-white 
+    text-lg 
+    font-bold 
+    uppercase 
+    tracking-wider 
+    rounded-lg 
+    shadow-lg 
+    hover:from-indigo-400 
+    hover:to-blue-600 
+    hover:shadow-xl 
+    transition-all 
+    duration-300 
+    ease-in-out
+  "
+              >
                 <Link
                   href={{
                     pathname: "creatememes/",
